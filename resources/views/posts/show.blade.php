@@ -8,7 +8,11 @@
     @endif
     <h2>Post details </h2>
     <div class="card mb-3">
-        <img src="{{ $post->image }}" class="card-img-top" alt="{{ $post->title }}">
+        @if (Str::contains($post->image, 'https'))
+            <img src="{{ $post->image }}" class="card-img-top" alt="{{ $post->title }}">
+        @else    
+            <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="{{ $post->title }}">
+        @endif
         <div class="card-body">
             <h5 class="card-title">{{ $post->title }} <span class="badge bg-primary">{{ $post->category->name }}</span></h5>
             <p class="card-text">Author: {{ $post->user->name }}</p>
